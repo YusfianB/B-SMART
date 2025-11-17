@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-SMART - Bubble System for Monitoring and Rubbish Trapping</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-water"></i>
+                <span>B-SMART</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#monitoring">Monitoring</a></li>
+                <li><a href="#report">Laporan</a></li>
+                <li><a href="#about">Tentang</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">B-SMART System</h1>
+            <p class="hero-subtitle">Sistem Pemantauan dan Perangkap Sampah Sungai</p>
+            <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Desa Pejagan, Bangkalan, Indonesia</p>
+        </div>
+        <div class="wave-container">
+            <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <h2 class="section-title">Dashboard Pemantauan Real-Time</h2>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="total-waste">0 kg</h3>
+                        <p>Total Sampah Terkumpul</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="waste-level">0%</h3>
+                        <p>Level Kapasitas</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="water-temp">28°C</h3>
+                        <p>Suhu Air</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="ph-level">7.2</h3>
+                        <p>pH Air</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Grid -->
+            <div class="monitoring-grid">
+                <!-- Live Camera Feed -->
+                <div class="monitor-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-video"></i> Live Camera Feed</h3>
+                        <span class="status-badge live">LIVE</span>
+                    </div>
+                    <div class="camera-feed">
+                        <div class="camera-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <p>Kamera Sungai Aktif</p>
+                            <small>Desa Pejagan, Bangkalan</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Waste Level Chart -->
+                <div class="monitor-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Level Sampah</h3>
+                        <span class="update-time" id="last-update">Diperbarui baru saja</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="wasteChart"></canvas>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="wasteProgress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environmental Data -->
+            <div class="environmental-data">
+                <h3><i class="fas fa-leaf"></i> Data Lingkungan</h3>
+                <div class="env-grid">
+                    <div class="env-item">
+                        <i class="fas fa-water"></i>
+                        <div>
+                            <strong>Turbidity</strong>
+                            <p id="turbidity">12 NTU</p>
+                        </div>
+                    </div>
+                    <div class="env-item">
+                        <i class="fas fa-wind"></i>
+                        <div>
+                            <strong>Arus Air</strong>
+                            <p id="water-flow">2.5 m/s</p>
+                        </div>
+                    </div>
+                    <div class="env-item">
+                        <i class="fas fa-droplet"></i>
+                        <div>
+                            <strong>Kelembaban</strong>
+                            <p id="humidity">75%</p>
+                        </div>
+                    </div>
+                    <div class="env-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Terakhir Dibersihkan</strong>
+                            <p id="last-cleaned">2 jam yang lalu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monitoring Section -->
+    <section id="monitoring" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Monitoring Kategori Sampah</h2>
+            
+            <div class="waste-categories">
+                <div class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-bottle-water"></i>
+                    </div>
+                    <h4>Plastik</h4>
+                    <p class="category-amount" id="plastic-waste">45 kg</p>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: 60%; background: #667eea;"></div>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-bag-shopping"></i>
+                    </div>
+                    <h4>Kantong Plastik</h4>
+                    <p class="category-amount" id="bag-waste">32 kg</p>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: 45%; background: #f5576c;"></div>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h4>Kemasan</h4>
+                    <p class="category-amount" id="package-waste">28 kg</p>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: 40%; background: #4facfe;"></div>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h4>Lainnya</h4>
+                    <p class="category-amount" id="other-waste">18 kg</p>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: 25%; background: #43e97b;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Section -->
+    <section id="report" class="section">
+        <div class="container">
+            <h2 class="section-title">Laporkan Polusi Lokal</h2>
+            
+            <div class="report-container">
+                <div class="report-info">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Bantu Jaga Kebersihan Sungai</h3>
+                    <p>Laporkan jika Anda melihat polusi atau sampah di sekitar sungai. Laporan Anda akan membantu kami dalam menjaga kebersihan lingkungan.</p>
+                    
+                    <div class="report-stats">
+                        <div class="report-stat-item">
+                            <strong id="total-reports">234</strong>
+                            <span>Total Laporan</span>
+                        </div>
+                        <div class="report-stat-item">
+                            <strong id="resolved-reports">198</strong>
+                            <span>Ditangani</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-form-container">
+                    <form id="pollution-form" class="report-form">
+                        <div class="form-group">
+                            <label for="location"><i class="fas fa-map-marker-alt"></i> Lokasi</label>
+                            <input type="text" id="location" placeholder="Contoh: Dekat Jembatan Pejagan" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category"><i class="fas fa-tags"></i> Kategori</label>
+                            <select id="category" required>
+                                <option value="">Pilih kategori...</option>
+                                <option value="sampah-plastik">Sampah Plastik</option>
+                                <option value="limbah-industri">Limbah Industri</option>
+                                <option value="pencemaran-air">Pencemaran Air</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pollutionDetails"><i class="fas fa-file-alt"></i> Detail Polusi</label>
+                            <textarea id="pollutionDetails" rows="4" placeholder="Jelaskan kondisi polusi yang Anda temukan..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Kirim Laporan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Tentang B-SMART</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Bubble System for Monitoring and Rubbish Trapping</h3>
+                    <p>B-SMART adalah sistem inovatif yang dirancang untuk memantau dan mengumpulkan sampah plastik di sungai menggunakan teknologi bubble barrier dan sensor IoT.</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Pemantauan Real-time 24/7</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Sensor Lingkungan Terintegrasi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Notifikasi Otomatis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ramah Lingkungan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-recycle"></i>
+                        <p>Teknologi Bubble Barrier</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notifications Container -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-water"></i> B-SMART</h4>
+                    <p>Menjaga kebersihan sungai untuk masa depan yang lebih baik.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-envelope"></i> info@bsmart.com</p>
+                    <p><i class="fas fa-phone"></i> +62 xxx xxxx xxxx</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Lokasi</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Desa Pejagan</p>
+                    <p>Bangkalan, Indonesia</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 B-SMART Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
